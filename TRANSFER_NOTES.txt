@@ -1,0 +1,23 @@
+RAMAYANA ANIMATION — SOURCE BACKUP
+==================================
+
+This archive contains the 22 files shown in the Netlify Agent Run change list,
+plus netlify.toml recovered from the published deploy (23 files total).
+
+Included:
+- AGENTS.md, PLAN.md, README.md, netlify.toml
+- Local Anton and Oswald fonts
+- Character and environment assets
+- Core timeline, texture, utility and overlay modules
+- Scene support kit and scenes 01–07
+- MP4/WebM muxer vendor files and MP4 muxer license
+
+IMPORTANT — this is a source backup, not a finished runnable film.
+According to PLAN.md, the following work was still pending:
+- Scenes 08–10
+- Scene registration module (public/js/scenes/index.js)
+- Application entry point (public/index.html) and stylesheet (public/css/app.css)
+- Export pipeline (public/js/export.js)
+- Final QC and verified video export
+
+Keep the existing source files unchanged when continuing development.
