@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ramayan — The Epic in 60 Seconds</title>
+  <meta name="description" content="A 60-second retro editorial motion-graphics telling of the Ramayana — 1080×1920, 30 fps, rendered live in the browser with MP4 export." />
+  <meta name="theme-color" content="#111319" />
+  <link rel="preload" href="fonts/anton.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="brand-mark">60</span>
+      <div>
+        <h1>RAMAYAN <em>The Epic in 60 Seconds</em></h1>
+        <p class="specs"><span>1080×1920</span><span>9:16</span><span>30 FPS</span><span>1800 FRAMES</span><span>60.000 s</span></p>
+      </div>
+    </div>
+    <div class="status" id="status">Loading fonts &amp; building scenes…</div>
+  </header>
+
+  <main class="layout">
+    <section class="viewer" aria-label="Film preview">
+      <div class="stage-wrap">
+        <div class="stage" id="stage">
+          <svg id="film" xmlns="http://www.w3.org/2000/svg" aria-label="Ramayan animation frame"></svg>
+          <canvas id="overlay" width="1080" height="1920"></canvas>
+          <div class="caption" id="caption" aria-live="polite"></div>
+          <div class="safe" id="safe" hidden></div>
+        </div>
+      </div>
+
+      <div class="transport">
+        <div class="buttons">
+          <button id="btnRestart" class="icon" title="Restart (Home)" aria-label="Restart"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 4h3v16H4zM20 4v16L8 12z" fill="currentColor"/></svg></button>
+          <button id="btnPrev" class="icon" title="Previous frame (←)" aria-label="Previous frame"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M18 4v16L6 12z" fill="currentColor"/></svg></button>
+          <button id="btnPlay" class="play" title="Play / Pause (Space)" aria-label="Play">PLAY</button>
+          <button id="btnNext" class="icon" title="Next frame (→)" aria-label="Next frame"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 4v16l12-8z" fill="currentColor"/></svg></button>
+          <div class="time">
+            <span id="tc">00:00:00</span>
+            <small id="fc">F 0001 / 1800</small>
+          </div>
+          <div class="toggles">
+            <label><input type="checkbox" id="optCaptions" checked /> Captions</label>
+            <label><input type="checkbox" id="optSafe" /> Safe area</label>
+            <label><input type="checkbox" id="optTexture" checked /> Print texture</label>
+          </div>
+        </div>
+        <div class="scrub">
+          <div class="segments" id="segments"></div>
+          <input type="range" id="scrubber" min="0" max="1799" step="1" value="0" aria-label="Timeline scrubber" />
+        </div>
+        <div class="now"><span id="sceneNow">SCENE 01</span> <b id="sceneTitle">The Kingdom of Ayodhya</b></div>
+      </div>
+    </section>
+
+    <aside class="panel">
+      <section class="card">
+        <h2>Scene index</h2>
+        <ol class="scenes" id="sceneList"></ol>
+      </section>
+
+      <section class="card export">
+        <h2>Render &amp; export</h2>
+        <div class="row">
+          <label class="seg"><input type="radio" name="fmt" value="mp4" checked /> <span>MP4 · H.264</span></label>
+          <label class="seg"><input type="radio" name="fmt" value="webm" /> <span>WebM · VP9</span></label>
+        </div>
+        <div class="row">
+          <label>Bitrate
+            <select id="bitrate">
+              <option value="8000000">8 Mbps</option>
+              <option value="12000000" selected>12 Mbps</option>
+              <option value="20000000">20 Mbps</option>
+            </select>
+          </label>
+          <label class="file">Narration / music (optional)
+            <input type="file" id="audioFile" accept="audio/*" />
+          </label>
+        </div>
+        <p class="support" id="support">Checking encoder support…</p>
+        <div class="row">
+          <button id="btnRender" class="primary">Render full video</button>
+          <button id="btnCancel" class="ghost" hidden>Cancel</button>
+        </div>
+        <div class="progress" id="progress" hidden>
+          <div class="bar"><i id="bar"></i></div>
+          <p id="progText">0 / 1800</p>
+          <canvas id="thumb" width="108" height="192"></canvas>
+        </div>
+        <div class="result" id="result" hidden></div>
+        <details class="ff">
+          <summary>FFmpeg conversion (WebM → MP4 H.264)</summary>
+          <code id="ffcmd"></code>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2>Production files &amp; QC</h2>
+        <div class="row wrap">
+          <button id="btnSrt" class="ghost">Narration .srt</button>
+          <button id="btnHits" class="ghost">Timing sheet .json</button>
+          <button id="btnPng" class="ghost">Current frame .png</button>
+          <button id="btnQc" class="ghost">Run QC</button>
+        </div>
+        <div class="qc" id="qc"></div>
+      </section>
+    </aside>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
